@@ -11,4 +11,4 @@ def test_no_command_prints_help(capsys: pytest.CaptureFixture[str]) -> None:
 def test_version(capsys: pytest.CaptureFixture[str]) -> None:
     with pytest.raises(SystemExit):
         main(["--version"])
-    assert "onboarding-agent 0.2.0" in capsys.readouterr().out
+    assert "onboarding-agent 0.3.0" in capsys.readouterr().out

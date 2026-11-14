@@ -51,6 +51,8 @@ class Settings:
     github_app_private_key_path: Path | None = None
     github_app_installation_id: str | None = None
     permission_cache_ttl: float = 300.0
+    # Slack user ids allowed to run admin-only slash commands (`/onboarding doctor`).
+    admins: tuple[str, ...] = ()
     extra: dict[str, Any] = field(default_factory=dict)
 
     def repo(self, full_name: str) -> RepoSource | None:
@@ -97,4 +99,7 @@ class Settings:
             spaces=spaces,
             identities_path=Path(os.environ.get("ONBOARDING_IDENTITIES", "config/identities.yaml")),
             db_path=Path(os.environ.get("ONBOARDING_DB", "onboarding.db")),
+            admins=tuple(
+                a.strip() for a in os.environ.get("ONBOARDING_ADMINS", "").split(",") if a.strip()
+            ),
         )

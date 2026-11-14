@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import anthropic
 
 from onboarding_agent.agent import OnboardingAgent
+from onboarding_agent.commands import Commands
 from onboarding_agent.config import Settings
-from onboarding_agent.identity import StaticIdentityResolver
-from onboarding_agent.permissions import LivePermissionChecker
+from onboarding_agent.identity import IdentityResolver, StaticIdentityResolver
+from onboarding_agent.permissions import LivePermissionChecker, PermissionChecker
 from onboarding_agent.sources.confluence import ConfluenceClient
 from onboarding_agent.sources.github import GitHubClient
 from onboarding_agent.sources.github_auth import AppInstallationToken, TokenProvider
@@ -50,17 +53,56 @@ def build_confluence(settings: Settings) -> ConfluenceClient | None:
     return ConfluenceClient(url, email, token)
 
 
-def build_agent(settings: Settings, store: Store | None = None) -> tuple[OnboardingAgent, Store]:
+@dataclass(frozen=True)
+class Services:
+    """Clients shared by the agent and the slash commands, so they share one permission cache."""
+
+    settings: Settings
+    identities: IdentityResolver
+    permissions: PermissionChecker
+    github: GitHubClient
+    confluence: ConfluenceClient | None
+    store: Store
+
+
+def build_services(settings: Settings, store: Store | None = None) -> Services:
     github = build_github(settings)
     confluence = build_confluence(settings)
-    store = store or Store(settings.db_path)
-    agent = OnboardingAgent(
-        client=anthropic.Anthropic(),
+    return Services(
         settings=settings,
         identities=StaticIdentityResolver.from_file(settings.identities_path),
         permissions=LivePermissionChecker(github, confluence, ttl=settings.permission_cache_ttl),
         github=github,
         confluence=confluence,
-        store=store,
+        store=store or Store(settings.db_path),
     )
-    return agent, store
+
+
+def agent_from(services: Services) -> OnboardingAgent:
+    return OnboardingAgent(
+        client=anthropic.Anthropic(),
+        settings=services.settings,
+        identities=services.identities,
+        permissions=services.permissions,
+        github=services.github,
+        confluence=services.confluence,
+        store=services.store,
+    )
+
+
+def commands_from(services: Services) -> Commands:
+    from onboarding_agent.doctor import run_doctor
+
+    return Commands(
+        settings=services.settings,
+        identities=services.identities,
+        permissions=services.permissions,
+        github=services.github,
+        store=services.store,
+        doctor=lambda user, emit: run_doctor(user, emit),
+    )
+
+
+def build_agent(settings: Settings, store: Store | None = None) -> tuple[OnboardingAgent, Store]:
+    services = build_services(settings, store)
+    return agent_from(services), services.store

@@ -1,6 +1,6 @@
 [project]
 name = "dev-onboarding-agent"
-version = "0.2.0"
+version = "0.3.0"
 description = "Slack agent that answers new-hire questions from GitHub and Confluence, scoped to each person's access"
 readme = "README.md"
 requires-python = ">=3.12"
