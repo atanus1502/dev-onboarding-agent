@@ -91,4 +91,5 @@ def settings(tmp: Path) -> Settings:
         spaces=(WikiSpace("ENG", org_wide=True), WikiSpace("PAY")),
         identities_path=tmp / "ids.yaml",
         db_path=tmp / "db.sqlite",
+        admins=("UADMIN",),
     )

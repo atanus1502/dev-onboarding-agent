@@ -1,4 +1,5 @@
-"""Slack front end (Bolt, Socket Mode). Answers DMs and @mentions in threads."""
+"""Slack front end (Bolt, Socket Mode). Answers DMs and @mentions in threads, and handles the
+`/onboarding` slash command."""
 
 from __future__ import annotations
 
@@ -13,6 +14,7 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack_sdk import WebClient
 
 from onboarding_agent.agent import Answer, OnboardingAgent
+from onboarding_agent.commands import Commands
 from onboarding_agent.store import Store
 
 log = logging.getLogger(__name__)
@@ -73,7 +75,7 @@ def post_answer(
     return None
 
 
-def create_app(agent: OnboardingAgent, store: Store) -> App:
+def create_app(agent: OnboardingAgent, store: Store, commands: Commands) -> App:
     app = App(token=os.environ["SLACK_BOT_TOKEN"])
 
     def handle(event: dict[str, Any], client: WebClient, bot_user_id: str | None) -> None:
@@ -132,8 +134,19 @@ def create_app(agent: OnboardingAgent, store: Store) -> App:
         if score is not None and item.get("type") == "message":
             store.record_feedback(item["channel"], item["ts"], score)
 
+    @app.command("/onboarding")
+    def on_command(ack: Any, command: dict[str, Any], respond: Any) -> None:
+        ack()  # Slack requires an ack within 3 seconds; the reply follows via respond()
+        try:
+            text = commands.handle(command["user_id"], command.get("text", ""))
+        except Exception:
+            log.exception("slash command failed")
+            text = "Something went wrong running that command. Try again in a moment."
+        respond(text=text, response_type="ephemeral")
+
     return app
 
 
-def serve(agent: OnboardingAgent, store: Store) -> None:
-    SocketModeHandler(create_app(agent, store), os.environ["SLACK_APP_TOKEN"]).start()  # type: ignore[no-untyped-call]
+def serve(agent: OnboardingAgent, store: Store, commands: Commands) -> None:
+    app = create_app(agent, store, commands)
+    SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()  # type: ignore[no-untyped-call]

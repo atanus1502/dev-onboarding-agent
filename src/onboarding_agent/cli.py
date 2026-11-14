@@ -63,12 +63,15 @@ def _run(args: argparse.Namespace) -> int:
         )
         return 0
 
-    agent, store = build_agent(settings)
     if args.command == "serve":
+        from onboarding_agent.runtime import agent_from, build_services, commands_from
         from onboarding_agent.slack_app import serve
 
-        serve(agent, store)
+        services = build_services(settings)
+        serve(agent_from(services), services.store, commands_from(services))
         return 0
+
+    agent, store = build_agent(settings)
     if args.command == "ask":
         answer = agent.answer(args.as_user, args.question)
         print(answer.text)

@@ -4,6 +4,17 @@ All notable changes are listed here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-11-14
+
+### Added
+- `/onboarding` slash command: `repos`, `setup <repo>`, `progress`, and admin-only `doctor`.
+  Replies are visible only to the caller and use the caller's own access. No model calls.
+- `ONBOARDING_ADMINS` setting for admin-only commands.
+
+### Changed
+- The Slack app needs the `commands` scope and the `/onboarding` command (see
+  `config/slack-manifest.yaml`); reinstall the app after updating its manifest.
+
 ## [0.2.0] - 2026-11-14
 
 ### Changed
@@ -28,5 +39,6 @@ All notable changes are listed here. The format follows
 - Verified local-setup walkthroughs from `.onboarding/setup.yaml`.
 - Weekly eval with leak, grounding, citation and fact checks; `doctor` command; CI.
 
+[0.3.0]: https://github.com/atanus1502/dev-onboarding-agent/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/atanus1502/dev-onboarding-agent/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/atanus1502/dev-onboarding-agent/releases/tag/v0.1.0

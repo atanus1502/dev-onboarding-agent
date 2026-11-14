@@ -95,6 +95,19 @@ here is the 20:06 local timestamp in the screenshot above).
 restarts. For long-running deployments, use a GitHub App rather than a personal token; see
 [deployment notes](docs/onboarding-agent.md#deploying).
 
+## In Slack
+
+- **Ask questions:** DM the bot, or `@onboarding` it in a channel after `/invite @onboarding`.
+  Channel answers go in a thread.
+- **Slash commands** (instant, no model cost, replies only you can see):
+
+| Command | What it does |
+|---|---|
+| `/onboarding repos` | Repos and wiki spaces you can access |
+| `/onboarding setup <repo>` | A repo's setup guide, your progress, and your next step |
+| `/onboarding progress` | Setup steps you've completed |
+| `/onboarding doctor` | Health check; only for Slack users listed in `ONBOARDING_ADMINS` |
+
 ## Commands
 
 | Command | What it does | Model cost |

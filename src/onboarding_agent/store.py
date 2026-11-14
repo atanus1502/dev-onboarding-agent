@@ -65,6 +65,18 @@ class Store:
         )
         return {r[0] for r in rows}
 
+    def progress(self, slack_user: str) -> dict[str, set[str]]:
+        """Passed step ids per repo, for repos where the user has passed at least one step."""
+        rows = self._db.execute(
+            "SELECT repo, step_id FROM setup_progress"
+            " WHERE slack_user=? AND passed=1 ORDER BY repo",
+            (slack_user,),
+        )
+        result: dict[str, set[str]] = {}
+        for repo, step in rows:
+            result.setdefault(repo, set()).add(step)
+        return result
+
     def log_interaction(
         self,
         slack_user: str,
