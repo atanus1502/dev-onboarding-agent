@@ -24,7 +24,7 @@ jobs:
       ONBOARDING_DB: /tmp/onboarding-eval.db
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v7
       - run: uv sync --frozen
       # The identity map holds personal account IDs, so it lives in a secret, not the repo.
       - name: Write identity map
