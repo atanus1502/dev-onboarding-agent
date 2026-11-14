@@ -108,6 +108,8 @@ restarts. For long-running deployments, use a GitHub App rather than a personal 
 | `/onboarding progress` | Setup steps you've completed |
 | `/onboarding doctor` | Health check; only for Slack users listed in `ONBOARDING_ADMINS` |
 
+![/onboarding repos and /onboarding help in Slack, both marked "Only visible to you"](docs/screenshots/16-slash-commands-repos-and-help.png)
+
 ## Commands
 
 | Command | What it does | Model cost |
