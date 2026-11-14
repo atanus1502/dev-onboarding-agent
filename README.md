@@ -77,6 +77,10 @@ docker run -d --name onboarding-agent --restart unless-stopped \
 
 ![The agent running as a container: docker ps, image size, version and the Slack connection log](docs/screenshots/12-docker-container-running.png)
 
+![Answer served from the container: the triage agent's default model, with links to config.py and .env.example](docs/screenshots/13-docker-answer-default-model.png)
+
+*The same question answered by the containerized bot, citing the exact lines in `config.py`.*
+
 `/data` keeps setup progress and the question log (used by `onboarding-agent mine`) across
 restarts. For long-running deployments, use a GitHub App rather than a personal token; see
 [deployment notes](docs/onboarding-agent.md#deploying).
