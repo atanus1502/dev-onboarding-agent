@@ -81,6 +81,16 @@ docker run -d --name onboarding-agent --restart unless-stopped \
 
 *The same question answered by the containerized bot, citing the exact lines in `config.py`.*
 
+### Verifying the container answered
+
+Slack delivers each message to one connected app, so check that the container is the only one
+running, then match its log and data to the Slack reply. Container times are UTC (09:06 UTC
+here is the 20:06 local timestamp in the screenshot above).
+
+![pgrep finds no bot outside Docker; the container's log shows the Claude and GitHub calls it made for the question](docs/screenshots/14-proof-container-made-the-calls.png)
+
+![The question and answer are stored in the container's /data volume](docs/screenshots/15-proof-answer-stored-in-container.png)
+
 `/data` keeps setup progress and the question log (used by `onboarding-agent mine`) across
 restarts. For long-running deployments, use a GitHub App rather than a personal token; see
 [deployment notes](docs/onboarding-agent.md#deploying).
