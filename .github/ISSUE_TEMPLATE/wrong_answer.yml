@@ -1,0 +1,24 @@
+name: Wrong or ungrounded answer
+description: The agent answered incorrectly, cited the wrong source, or invented something.
+labels: [answer-quality]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question asked
+    validations:
+      required: true
+  - type: textarea
+    id: answer
+    attributes:
+      label: What the agent said
+      description: Paste the reply, or link a screenshot. Remove anything sensitive.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: The correct answer, and where it's documented
+      description: These become eval cases, so links to the right code or page help most.
+    validations:
+      required: true

@@ -1,0 +1,22 @@
+name: Bug report
+description: Something crashes, errors or behaves differently than documented.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Include the command or Slack message, and the output. Remove tokens and IDs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `uv run devtools onboard doctor`
+      render: text

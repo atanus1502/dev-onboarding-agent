@@ -1,0 +1,47 @@
+[project]
+name = "dev-onboarding-agent"
+version = "0.1.0"
+description = "Slack agent that answers new-hire questions from GitHub and Confluence, scoped to each person's access"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=2.8.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.14.3",
+    "pyjwt[crypto]>=2.15.1",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+    "slack-bolt>=1.30.0",
+]
+
+[project.scripts]
+devtools = "developer_tools.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "types-pyyaml>=6.0.12.20261113",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The distribution is named after the repo; the import package keeps its original name.
+[tool.hatch.build.targets.wheel]
+packages = ["src/developer_tools"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

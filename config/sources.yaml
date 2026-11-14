@@ -1,0 +1,40 @@
+# Generated from github.com/atanus1502. All repos are public, so org_wide: true
+# (answers citing them may be posted in channels). Add docs_paths for ADR/architecture folders.
+repos:
+  - name: atanus1502/claims-intake-agent
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/incident-triage-agent
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/constellation-dx-components
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/temporal-order-processing
+    default_branch: master
+    org_wide: true
+  - name: atanus1502/borischerny-claude.md
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/aws-mainframe-modernization-carddemo
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/graphrag-kyc-agent
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/building-evals
+    default_branch: master
+    org_wide: true
+  - name: atanus1502/customer_feedback_analyzer
+    default_branch: master
+    org_wide: true
+  - name: atanus1502/scaling-claude-agents
+    default_branch: main
+    org_wide: true
+  - name: atanus1502/cma-sre-agent
+    default_branch: master
+    org_wide: true
+
+confluence_spaces:
+  - key: ENG
+    org_wide: true   # engineering-wide docs; page restrictions are still checked per user

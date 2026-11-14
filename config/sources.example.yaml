@@ -1,0 +1,13 @@
+# Copy to config/sources.yaml. The bot's GitHub token and Confluence service account must be
+# able to read everything listed; each user's own access is checked live on every request.
+repos:
+  - name: acme/payments-api
+    default_branch: main
+    docs_paths: [docs/, docs/adr/]
+  - name: acme/platform-handbook
+    org_wide: true          # every employee can read it, so answers citing it can post publicly
+    docs_paths: [architecture/]
+confluence_spaces:
+  - key: ENG
+    org_wide: true
+  - key: PAY
