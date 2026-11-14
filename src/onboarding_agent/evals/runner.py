@@ -20,7 +20,7 @@ import anthropic
 import yaml
 from pydantic import BaseModel
 
-from developer_tools.onboarding.agent import Answer, OnboardingAgent
+from onboarding_agent.agent import Answer, OnboardingAgent
 
 LINK_RE = re.compile(r"<(https?://[^|>\s]+)(?:\|[^>]*)?>|(https?://[^\s<>)]+)")
 

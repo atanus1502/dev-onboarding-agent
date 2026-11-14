@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from developer_tools.onboarding.config import RepoSource, Settings, WikiSpace
-from developer_tools.onboarding.identity import Identity
-from developer_tools.onboarding.sources.confluence import WikiHit, WikiPage
-from developer_tools.onboarding.sources.github import CodeHit, DirEntry, FileContent, GitHubError
+from onboarding_agent.config import RepoSource, Settings, WikiSpace
+from onboarding_agent.identity import Identity
+from onboarding_agent.sources.confluence import WikiHit, WikiPage
+from onboarding_agent.sources.github import CodeHit, DirEntry, FileContent, GitHubError
 
 GUIDE = """
 title: Run api locally

@@ -4,10 +4,10 @@ from typing import Any
 
 import pytest
 
-from developer_tools.onboarding.identity import Identity
-from developer_tools.onboarding.sources.confluence import WikiPage
-from developer_tools.onboarding.store import Store
-from developer_tools.onboarding.tools import NO_ACCESS, AskContext, build_tools
+from onboarding_agent.identity import Identity
+from onboarding_agent.sources.confluence import WikiPage
+from onboarding_agent.store import Store
+from onboarding_agent.tools import NO_ACCESS, AskContext, build_tools
 from tests.onboarding_fakes import GUIDE, FakeConfluence, FakeGitHub, FakePermissions, settings
 
 

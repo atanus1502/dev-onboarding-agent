@@ -3,7 +3,7 @@ import tarfile
 
 import httpx
 
-from developer_tools.onboarding.sources.github import GitHubClient, _parse_query
+from onboarding_agent.sources.github import GitHubClient, _parse_query
 
 FILES = {
     "triage/permissions.py": "class ReadOnlyTransport:\n    pass\n",
@@ -73,3 +73,17 @@ def test_parse_query() -> None:
         ["retry", "dead letter"],
         ["src"],
     )
+
+
+def test_unparseable_query_falls_back_to_scan() -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/search/code":
+            return httpx.Response(422, json={"message": "Validation Failed"})
+        if "/commits/" in request.url.path:
+            return httpx.Response(200, text="abc123")
+        return httpx.Response(200, content=_tarball())
+
+    gh = GitHubClient("t", http=httpx.Client(transport=httpx.MockTransport(handler)))
+    assert [h.path for h in gh.search_code("ReadOnlyTransport path:", ["acme/api"])] == [
+        "triage/permissions.py"
+    ]

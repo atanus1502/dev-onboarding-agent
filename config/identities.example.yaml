@@ -3,3 +3,8 @@
 U0123ABCD:
   github: octocat
   atlassian: 5b10ac8d82e05b22cc7d4ef5
+
+# Eval persona used by evals/questions.yaml. U_EVAL_UNLINKED must NOT appear here.
+U_EVAL_ENGINEER:
+  github: octocat
+  atlassian: 5b10ac8d82e05b22cc7d4ef5

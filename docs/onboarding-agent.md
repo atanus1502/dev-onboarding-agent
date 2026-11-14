@@ -52,7 +52,7 @@ own. Progress is stored per user in SQLite, so a walkthrough can resume days lat
 ## Evals
 
 `evals/questions.yaml` holds real new-hire questions, each asked as a real Slack user, with
-engineer-written expected facts. `devtools onboard eval` grades every case on:
+engineer-written expected facts. `onboarding-agent eval` grades every case on:
 
 | Check | How | Fails CI |
 | --- | --- | --- |
@@ -65,7 +65,7 @@ The run fails on any leak, or if the pass rate drops more than 5 points below
 `evals/baseline.json` (copy a good run's `summary` there). `.github/workflows/weekly-evals.yml`
 runs it every Monday and posts the summary to `SLACK_EVAL_CHANNEL`.
 
-To grow the set: `devtools onboard mine --days 7` exports the week's real questions, with
+To grow the set: `onboarding-agent mine --days 7` exports the week's real questions, with
 thumbs-down ones first, to `evals/candidates.yaml`. An engineer fills in `facts` and citations
 and moves the good ones into `questions.yaml`. Don't copy the agent's answer in as the expected
 facts. Include cases asked by people *without* access, with `must_not_access` set.
@@ -83,8 +83,10 @@ before scheduling it at scale.
    (`sources/github_auth.py`). A fine-grained PAT in `GITHUB_TOKEN` also works for trying it out.
 3. Create a Confluence service account that can read the configured spaces, plus an API token.
 4. Copy `config/*.example.yaml` and `.env.example`, fill them in (`.env` is loaded automatically).
-5. `uv run devtools onboard doctor --as <slack id>` checks every credential and source with free
+5. `uv run onboarding-agent doctor --as <slack id>` checks every credential and source with free
    read-only calls and lists what that user can read. Fix anything marked FAIL, then
-   `uv run devtools onboard serve`.
+   `uv run onboarding-agent serve`.
+6. To run it permanently, use the container instead: see "Run it as a container" in the
+   [README](../README.md#run-it-as-a-container).
 
-Try it without Slack: `uv run devtools onboard ask --as U0123ABCD "how do I run payments-api?"`
+Try it without Slack: `uv run onboarding-agent ask --as U0123ABCD "how do I run payments-api?"`

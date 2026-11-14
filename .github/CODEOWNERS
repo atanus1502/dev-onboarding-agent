@@ -1,4 +1,4 @@
 # Required reviews only apply once "Require review from Code Owners" is on in branch protection.
 *                                              @atanus1502
-/src/developer_tools/onboarding/permissions.py @atanus1502
-/src/developer_tools/onboarding/tools.py       @atanus1502
+/src/onboarding_agent/permissions.py @atanus1502
+/src/onboarding_agent/tools.py       @atanus1502

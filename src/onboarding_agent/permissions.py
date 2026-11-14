@@ -12,9 +12,9 @@ import time
 from collections.abc import Callable
 from typing import Protocol
 
-from developer_tools.onboarding.identity import Identity
-from developer_tools.onboarding.sources.confluence import ConfluenceClient
-from developer_tools.onboarding.sources.github import GitHubClient
+from onboarding_agent.identity import Identity
+from onboarding_agent.sources.confluence import ConfluenceClient
+from onboarding_agent.sources.github import GitHubClient
 
 log = logging.getLogger(__name__)
 

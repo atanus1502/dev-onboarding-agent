@@ -20,3 +20,13 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run mypy src
       - run: uv run pytest
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t dev-onboarding-agent .
+      - name: Smoke test
+        run: docker run --rm dev-onboarding-agent onboarding-agent --version

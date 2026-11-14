@@ -5,7 +5,7 @@
       "Bash(uv run pytest:*)",
       "Bash(uv run ruff:*)",
       "Bash(uv run mypy:*)",
-      "Bash(uv run devtools:*)",
+      "Bash(uv run onboarding-agent:*)",
       "Bash(uv add:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",

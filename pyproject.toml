@@ -1,6 +1,6 @@
 [project]
 name = "dev-onboarding-agent"
-version = "0.1.0"
+version = "0.2.0"
 description = "Slack agent that answers new-hire questions from GitHub and Confluence, scoped to each person's access"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-devtools = "developer_tools.cli:main"
+onboarding-agent = "onboarding_agent.cli:main"
 
 [dependency-groups]
 dev = [
@@ -31,7 +31,7 @@ build-backend = "hatchling.build"
 
 # The distribution is named after the repo; the import package keeps its original name.
 [tool.hatch.build.targets.wheel]
-packages = ["src/developer_tools"]
+packages = ["src/onboarding_agent"]
 
 [tool.ruff]
 line-length = 100

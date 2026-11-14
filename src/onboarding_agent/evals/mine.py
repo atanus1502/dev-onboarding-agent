@@ -12,7 +12,7 @@ from pathlib import Path
 
 import yaml
 
-from developer_tools.onboarding.store import Store
+from onboarding_agent.store import Store
 
 
 def mine(store: Store, days: int, out: Path) -> int:

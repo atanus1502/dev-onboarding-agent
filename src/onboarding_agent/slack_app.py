@@ -12,8 +12,8 @@ from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack_sdk import WebClient
 
-from developer_tools.onboarding.agent import Answer, OnboardingAgent
-from developer_tools.onboarding.store import Store
+from onboarding_agent.agent import Answer, OnboardingAgent
+from onboarding_agent.store import Store
 
 log = logging.getLogger(__name__)
 

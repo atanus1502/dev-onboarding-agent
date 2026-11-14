@@ -18,5 +18,5 @@ body:
   - type: textarea
     id: doctor
     attributes:
-      label: Output of `uv run devtools onboard doctor`
+      label: Output of `uv run onboarding-agent doctor`
       render: text

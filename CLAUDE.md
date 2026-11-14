@@ -1,9 +1,9 @@
-# DeveloperTools
+# dev-onboarding-agent
 
-Python 3.12+ package managed with **uv**, `src/` layout. CLI entry point: `devtools` → `developer_tools.cli:main`.
+Python 3.12+ package managed with **uv**, `src/` layout. CLI entry point: `onboarding-agent` → `onboarding_agent.cli:main`.
 
-Main component: a Slack onboarding agent in `src/developer_tools/onboarding/` (Claude tool runner
-over GitHub + Confluence, per-user permissions, verified setup walkthroughs, weekly evals).
+A Slack onboarding agent in `src/onboarding_agent/` (Claude tool runner over GitHub +
+Confluence, per-user permissions, verified setup walkthroughs, weekly evals).
 Design and deploy notes: [docs/onboarding-agent.md](docs/onboarding-agent.md).
 
 ## Commands
@@ -11,11 +11,11 @@ Design and deploy notes: [docs/onboarding-agent.md](docs/onboarding-agent.md).
 - Test: `uv run pytest` (single test: `uv run pytest tests/test_onboarding_tools.py::test_read_file_returns_permalink_and_records_source`)
 - Lint/format: `uv run ruff check --fix . && uv run ruff format .`
 - Type check: `uv run mypy src`
-- Agent: `uv run devtools onboard {doctor,serve,ask,eval,mine}` (needs `.env` + `config/*.yaml`, see `.env.example`; run `doctor` first, it costs no tokens)
+- Agent: `uv run onboarding-agent {doctor,serve,ask,eval,mine}` (needs `.env` + `config/*.yaml`, see `.env.example`; run `doctor` first, it costs no tokens)
 - Add a dependency: `uv add <pkg>` (dev: `uv add --dev <pkg>`) — don't edit dependency lists by hand or use pip.
 
 ## Conventions
-- Code lives in `src/developer_tools/`; tests in `tests/` as `test_*.py`. Onboarding tests use the in-memory fakes in `tests/onboarding_fakes.py`. Never hit real APIs in tests.
+- Code lives in `src/onboarding_agent/`; tests in `tests/` as `test_*.py`. Onboarding tests use the in-memory fakes in `tests/onboarding_fakes.py`. Never hit real APIs in tests.
 - Full type hints everywhere (mypy strict). Line length 100.
 - Run tests, ruff, and mypy before calling a change done.
 

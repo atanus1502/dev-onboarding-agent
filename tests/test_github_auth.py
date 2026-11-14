@@ -5,7 +5,7 @@ import jwt
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 
-from developer_tools.onboarding.sources.github_auth import AppInstallationToken
+from onboarding_agent.sources.github_auth import AppInstallationToken
 
 
 def _pem() -> str:

@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import anthropic
 
-from developer_tools.onboarding.agent import OnboardingAgent
-from developer_tools.onboarding.config import Settings
-from developer_tools.onboarding.identity import StaticIdentityResolver
-from developer_tools.onboarding.permissions import LivePermissionChecker
-from developer_tools.onboarding.sources.confluence import ConfluenceClient
-from developer_tools.onboarding.sources.github import GitHubClient
-from developer_tools.onboarding.sources.github_auth import AppInstallationToken, TokenProvider
-from developer_tools.onboarding.store import Store
+from onboarding_agent.agent import OnboardingAgent
+from onboarding_agent.config import Settings
+from onboarding_agent.identity import StaticIdentityResolver
+from onboarding_agent.permissions import LivePermissionChecker
+from onboarding_agent.sources.confluence import ConfluenceClient
+from onboarding_agent.sources.github import GitHubClient
+from onboarding_agent.sources.github_auth import AppInstallationToken, TokenProvider
+from onboarding_agent.store import Store
 
 
 def github_credentials(settings: Settings) -> str | TokenProvider:

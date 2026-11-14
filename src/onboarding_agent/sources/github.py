@@ -12,7 +12,7 @@ from typing import Any
 
 import httpx
 
-from developer_tools.onboarding.sources.github_auth import TokenProvider, static_token
+from onboarding_agent.sources.github_auth import TokenProvider, static_token
 
 # GitHub rejects code-search queries longer than 256 characters.
 _MAX_QUERY_LEN = 256
@@ -132,12 +132,17 @@ class GitHubClient:
     def _indexed_search(self, query: str, repos: list[str], limit: int) -> list[CodeHit]:
         hits: list[CodeHit] = []
         for chunk in _chunk_repo_qualifiers(query, repos):
-            data = self._get(
-                "/search/code",
-                accept="application/vnd.github.text-match+json",
-                q=chunk,
-                per_page=limit,
-            )
+            try:
+                data = self._get(
+                    "/search/code",
+                    accept="application/vnd.github.text-match+json",
+                    q=chunk,
+                    per_page=limit,
+                )
+            except httpx.HTTPStatusError as e:
+                if e.response.status_code == 422:  # query GitHub can't parse; let the scan try
+                    return []
+                raise
             for item in data.get("items", []):
                 hits.append(
                     CodeHit(

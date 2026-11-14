@@ -10,13 +10,13 @@ from typing import Any
 
 from anthropic import beta_tool
 
-from developer_tools.onboarding.config import Settings
-from developer_tools.onboarding.identity import Identity
-from developer_tools.onboarding.permissions import PermissionChecker
-from developer_tools.onboarding.setup_guides import GUIDE_PATH, check_output, parse_guide
-from developer_tools.onboarding.sources.confluence import ConfluenceClient
-from developer_tools.onboarding.sources.github import GitHubClient, GitHubError
-from developer_tools.onboarding.store import Store
+from onboarding_agent.config import Settings
+from onboarding_agent.identity import Identity
+from onboarding_agent.permissions import PermissionChecker
+from onboarding_agent.setup_guides import GUIDE_PATH, check_output, parse_guide
+from onboarding_agent.sources.confluence import ConfluenceClient
+from onboarding_agent.sources.github import GitHubClient, GitHubError
+from onboarding_agent.store import Store
 
 log = logging.getLogger(__name__)
 

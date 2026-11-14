@@ -1,4 +1,4 @@
-"""`devtools onboard doctor`: checks configuration and credentials with free, read-only calls
+"""`onboarding-agent doctor`: checks configuration and credentials with free, read-only calls
 (no model tokens are spent), and optionally shows what one Slack user can access."""
 
 from __future__ import annotations
@@ -9,12 +9,12 @@ from functools import partial
 
 import anthropic
 
-from developer_tools.onboarding.config import Settings
-from developer_tools.onboarding.identity import StaticIdentityResolver
-from developer_tools.onboarding.permissions import LivePermissionChecker
-from developer_tools.onboarding.runtime import build_confluence, build_github
-from developer_tools.onboarding.setup_guides import GUIDE_PATH, parse_guide
-from developer_tools.onboarding.sources.github import GitHubError
+from onboarding_agent.config import Settings
+from onboarding_agent.identity import StaticIdentityResolver
+from onboarding_agent.permissions import LivePermissionChecker
+from onboarding_agent.runtime import build_confluence, build_github
+from onboarding_agent.setup_guides import GUIDE_PATH, parse_guide
+from onboarding_agent.sources.github import GitHubError
 
 
 class Report:

@@ -1,14 +1,14 @@
 from typing import Any
 from unittest.mock import MagicMock
 
-from developer_tools.onboarding.agent import Answer
-from developer_tools.onboarding.evals.runner import EvalCase, compare, deterministic_checks
-from developer_tools.onboarding.identity import Identity
-from developer_tools.onboarding.permissions import LivePermissionChecker
-from developer_tools.onboarding.slack_app import PRIVATE_NOTE, post_answer, thread_history
-from developer_tools.onboarding.sources.confluence import html_to_text
-from developer_tools.onboarding.sources.github import _chunk_repo_qualifiers
-from developer_tools.onboarding.tools import SourceRef
+from onboarding_agent.agent import Answer
+from onboarding_agent.evals.runner import EvalCase, compare, deterministic_checks
+from onboarding_agent.identity import Identity
+from onboarding_agent.permissions import LivePermissionChecker
+from onboarding_agent.slack_app import PRIVATE_NOTE, post_answer, thread_history
+from onboarding_agent.sources.confluence import html_to_text
+from onboarding_agent.sources.github import _chunk_repo_qualifiers
+from onboarding_agent.tools import SourceRef
 
 NEWHIRE = Identity("U1", "newhire", "acct-1")
 
@@ -109,7 +109,7 @@ def test_public_repo_skips_collaborator_lookup_but_private_does_not() -> None:
 def test_get_file_returns_raw_text_despite_json_content_type() -> None:
     import httpx
 
-    from developer_tools.onboarding.sources.github import GitHubClient
+    from onboarding_agent.sources.github import GitHubClient
 
     def handler(request: httpx.Request) -> httpx.Response:
         if "/commits/" in request.url.path:

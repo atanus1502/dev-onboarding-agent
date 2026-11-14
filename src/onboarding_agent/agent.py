@@ -8,13 +8,13 @@ from dataclasses import dataclass
 import anthropic
 from anthropic.types.beta import BetaMessageParam, BetaTextBlockParam
 
-from developer_tools.onboarding.config import Settings
-from developer_tools.onboarding.identity import IdentityResolver
-from developer_tools.onboarding.permissions import PermissionChecker
-from developer_tools.onboarding.sources.confluence import ConfluenceClient
-from developer_tools.onboarding.sources.github import GitHubClient
-from developer_tools.onboarding.store import Store
-from developer_tools.onboarding.tools import AskContext, SourceRef, build_tools
+from onboarding_agent.config import Settings
+from onboarding_agent.identity import IdentityResolver
+from onboarding_agent.permissions import PermissionChecker
+from onboarding_agent.sources.confluence import ConfluenceClient
+from onboarding_agent.sources.github import GitHubClient
+from onboarding_agent.store import Store
+from onboarding_agent.tools import AskContext, SourceRef, build_tools
 
 log = logging.getLogger(__name__)
 
