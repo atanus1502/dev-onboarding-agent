@@ -20,7 +20,7 @@ Design and deploy notes: [docs/onboarding-agent.md](docs/onboarding-agent.md).
 - Run tests, ruff, and mypy before calling a change done.
 
 ## Onboarding agent invariants (don't break these)
-- Every tool in `onboarding/tools.py` checks the asking user's access via `PermissionChecker` before touching a source, and records what it returned with `ctx.note(...)`. That record drives the channel-visibility rule and the eval leak/grounding checks.
+- Every tool in `src/onboarding_agent/tools.py` checks the asking user's access via `PermissionChecker` before touching a source, and records what it returned with `ctx.note(...)`. That record drives the channel-visibility rule and the eval leak/grounding checks.
 - Permission checks fail closed. Missing and forbidden resources return the same `NO_ACCESS` text.
 - `check_setup_step` grades `ctx.latest_user_message`, never model-supplied text.
 - Model defaults to `claude-opus-5-5`, with `fallbacks="default"` (beta `server-side-fallback-2026-07-01`). Handle `stop_reason == "refusal"` before reading content.
